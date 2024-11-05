@@ -57,6 +57,17 @@ class BinaryTree:
         if self.root is not None:
             aux = __search(self.root, key)
         return aux
+    
+    def proximity_search(self, search_value):
+        def __proximity_search(root, search_value):
+            if root is not None:
+                __proximity_search(root.left, search_value)
+                if root.value.startswith(search_value):
+                    print(root.value)
+                __proximity_search(root.right, search_value)
+
+        if self.root is not None:
+            __proximity_search(self.root, search_value)
 
     def preorden(self):
         def __preorden(root):
@@ -69,6 +80,17 @@ class BinaryTree:
 
         if self.root is not None:
             __preorden(self.root)
+        
+    def contar_nodos(self):
+        def __contar_nodos(root):
+            if root is not None:
+                left=__contar_nodos(root.left)
+                right=__contar_nodos(root.right)
+                return 1 + left + right  # Retornar el total de nodos contados
+            return 0
+        if self.root is not None:
+            total_nodes =__contar_nodos(self.root)
+            return total_nodes
 
     def contar_super_heroes(self):
         def __contar_super_heroes(root):
@@ -92,6 +114,19 @@ class BinaryTree:
         if self.root is not None:
             __inorden(self.root)
 
+    def inorden_alfabetico(self):
+        def __inorden_alfabetico(root):
+            if root is not None:
+                __inorden_alfabetico(root.left)
+                listaalf.append(root.value)
+                __inorden_alfabetico(root.right)
+        listaalf=[]
+        if self.root is not None:
+            __inorden_alfabetico(self.root)
+        listaalf.sort()
+        return listaalf
+
+
     def postorden(self):
         def __postorden(root):
             if root is not None:
@@ -102,16 +137,6 @@ class BinaryTree:
         if self.root is not None:
             __postorden(self.root)
 
-    def inorden_villanos(self):
-        def __inorden_villanos(root):
-            if root is not None:
-                __inorden_villanos(root.left)
-                if root.other_value.get('is_hero') is not True:
-                    print(root.value)
-                __inorden_villanos(root.right)
-
-        if self.root is not None:
-            __inorden_villanos(self.root)
 
     def inorden_superheros_start_with(self, start):
         def __inorden_superheros_start_with(root, start):
@@ -123,6 +148,31 @@ class BinaryTree:
 
         if self.root is not None:
             __inorden_superheros_start_with(self.root, start)
+
+    def inorden_villanos(self):
+        def __inorden_villanos(root):
+            if root is not None:
+                __inorden_villanos(root.left)
+                if root.other_value.get('is_hero') is not True:
+                    print(root.value)
+                __inorden_villanos(root.right)
+        if self.root is not None:
+            __inorden_villanos(self.root)
+
+
+    def inorden_villanos_alfabetico(self):                       
+        def __inorden_villanos(root):                            
+            if root is not None:
+                __inorden_villanos(root.left)
+                if root.other_value.get('is_hero') is not True:
+                    lista.append(root.value)
+                __inorden_villanos(root.right)
+        lista=[]
+        if self.root is not None:
+            __inorden_villanos(self.root)
+        lista.sort()
+        return lista
+
 
     def by_level(self):
         pendientes = Queue()
